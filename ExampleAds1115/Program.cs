@@ -13,7 +13,7 @@ namespace ExampleAds1115
                 return;
             }
 
-            var adConverter = new Ads1115();
+            var adConverter = new SimpleAds1115();
 
             Console.WriteLine("Converter was initialize");
 
