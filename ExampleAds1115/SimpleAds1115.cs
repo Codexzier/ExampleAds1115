@@ -27,16 +27,17 @@ namespace ExampleAds1115
         internal ushort ReadSingleInputValue(AdInput input)
         {
             ushort config = 0x0003 |    // disable the comparator
-               0x0100;                  // Single-shot mode (default)
-            //0x0080 |                 // 128 samples per second (default)
+                            0x0100;     // Single-shot mode (default)
 
-            config |= GetConfigAnalogInput(input);
+            config |= GetConfigurationForAnalogInput(input);
 
             // Operational status/single-shot conversion start
             // - Begin a single conversion
             config |= 0x8000;
 
+            // prepare configuration to send on I²C
             byte[] data = new byte[] { (byte)(config >> 8), (byte)(config & 0xff) };
+
             // Write to configuratioin register
             this._i2CPeripheral.WriteRegisters(0x01, data);
 
@@ -54,7 +55,7 @@ namespace ExampleAds1115
         /// </summary>
         /// <param name="input">Set the input port.</param>
         /// <returns>Return the bit setup.</returns>
-        private static ushort GetConfigAnalogInput(AdInput input)
+        private static ushort GetConfigurationForAnalogInput(AdInput input)
         {
             switch (input)
             {
