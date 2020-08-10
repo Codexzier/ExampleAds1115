@@ -9,11 +9,12 @@ namespace ExampleAds1115
         {
             if (args.Length > 0 && args[0] == "--exitOnDebug")
             {
-                // wrong debug way. Left click on the project and click on context menu deploy
+                // Wrong way. Application cannot be debugged in this mode. 
+                // Right-click on the project and click Deploy on the context menu.
                 return;
             }
 
-            var adConverter = new Ads1115();
+            var adConverter = new SimpleAds1115();
 
             Console.WriteLine("Converter was initialize");
 
