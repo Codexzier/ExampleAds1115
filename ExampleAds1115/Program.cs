@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace ExampleAds1115
@@ -14,15 +15,27 @@ namespace ExampleAds1115
                 return;
             }
 
-            var adConverter = new SimpleAds1115();
+            var adConverter = new Ads1115();
 
             Console.WriteLine("Converter was initialize");
 
             while (true)
             {
-                var resultA0 = adConverter.ReadSingleInputValue(AdInput.A0);
+                var resultA0 = adConverter.ReadInputValue(AdsInput.A0);
 
-                Console.WriteLine($"Input A0: {resultA0}");
+                Console.Write($"Input A0: {resultA0}, ");
+
+                if(resultA0 <= 0)
+                {
+                    Console.WriteLine($"Voltage: 0V");
+                }
+                else
+                {
+                    // 5v ca. 22610
+                    var voltage = (float)(resultA0 / 22610f) * 5.0f;
+                    Console.WriteLine($"Voltage: {voltage}V");
+                }
+                
                 Thread.Sleep(1000);
             }
         }

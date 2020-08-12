@@ -1,8 +1,18 @@
-# SimpleCode Branch from ExampleAds1115
-This branch shows a simple code snipped of how to use the I²C interface and communicate with an analog-to-digital converter.
+# ExampleAds1115
+Mit diesem beispiel wird eine Klasse geliefert, mit dem sich das Modul ADS1115 Umfänglich auslesen lässt. Für den schnellen Einstieg habe ich einen Branch dazu abgeleitet mit einer einfachen und Kurzen Klasse.
 
-## A simple Analog Digital Converter code
-This short code example is kept as short as possible. Therefore more emphasis was put on comments to describe the steps used and to make them more comprehensible. For the full feature set for the use of the module ADS1115, I refer to the main branch.
+## Die Klasse Ads1115
+Mit der Instanze dieser Klasse können neben der Möglichkeit einzelne Messungen, auch Fortlaufenden Messungen abgefragt werden. Zudem kann die Maximale messbare höhe der anliegenden Spannung an den Eingängen voreingestellt werden.
+
+##### Standard Einestellungen
+Comperator ist ausgeschaltet
+Keine Verriegellung
+Alert/Rdy active low
+Traditional comperator
+
+Single-shot mode
+
+
 
 ###### Options
 All four inputs can be read in this code snippets. Using the 'ReadSingleInputValue' method, input A0, A1, A2 and A3 can be set via the parameter.

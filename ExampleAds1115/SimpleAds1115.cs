@@ -13,6 +13,29 @@ namespace ExampleAds1115
     {
         private readonly II2cPeripheral _i2CPeripheral;
 
+        /// <summary>
+        /// Input multiplexer configuration for ADS1115 (Bit 14 bis 12)
+        /// </summary>
+        public enum AdsInput
+        {
+            /// <summary>
+            /// AINp = AIN0 and AINn = GND
+            /// </summary>
+            AIN_0 = 0x4000,
+            /// <summary>
+            /// AINp = AIN1 and AINn = GND
+            /// </summary>
+            AIN_1 = 0x5000,
+            /// <summary>
+            /// AINp = AIN2 and AINn = GND
+            /// </summary>
+            AIN_2 = 0x6000,
+            /// <summary>
+            /// AINp = AIN3 and AINn = GND
+            /// </summary>
+            AIN_3 = 0x7000
+        }
+
         public SimpleAds1115()
         {
             var i2CBus = Device.CreateI2cBus();
@@ -24,12 +47,12 @@ namespace ExampleAds1115
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        internal ushort ReadSingleInputValue(AdInput input)
+        internal ushort ReadSingleInputValue(AdsInput input)
         {
             ushort config = 0x0003 |    // disable the comparator
                             0x0100;     // Single-shot mode (default)
 
-            config |= GetConfigurationForAnalogInput(input);
+            config |= (ushort)input;
 
             // Operational status/single-shot conversion start
             // - Begin a single conversion
@@ -48,24 +71,6 @@ namespace ExampleAds1115
             var result = this._i2CPeripheral.ReadRegisters(0x00, 2);
 
             return (ushort)((result[0] << 8) | result[1]);
-        }
-
-        /// <summary>
-        /// Mapped config bytes for mapped input setup.
-        /// </summary>
-        /// <param name="input">Set the input port.</param>
-        /// <returns>Return the bit setup.</returns>
-        private static ushort GetConfigurationForAnalogInput(AdInput input)
-        {
-            switch (input)
-            {
-                case AdInput.A0: return 0x4000;
-                case AdInput.A1: return 0x5000;
-                case AdInput.A2: return 0x6000;
-                case AdInput.A3: return 0x7000;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(AdInput), $"Check parameter: {input}");
-            }
         }
     }
 }
