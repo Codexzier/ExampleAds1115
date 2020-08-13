@@ -14,13 +14,13 @@ namespace ExampleAds1115
                 return;
             }
 
-            var adConverter = new Ads1115();
+            var adConverter = new SimpleAds1115();
 
             Console.WriteLine("Converter was initialize");
 
             while (true)
             {
-                var resultA0 = adConverter.ReadInputValue(AdsInput.A0);
+                var resultA0 = adConverter.ReadSingleInputValue(AdsInput.A0);
 
                 Console.Write($"Input A0: {resultA0}, ");
                 Console.WriteLine($"Voltage: {GetVoltage(resultA0)}V");
