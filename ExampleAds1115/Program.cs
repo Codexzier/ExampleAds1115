@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace ExampleAds1115
@@ -24,20 +23,20 @@ namespace ExampleAds1115
                 var resultA0 = adConverter.ReadInputValue(AdsInput.A0);
 
                 Console.Write($"Input A0: {resultA0}, ");
+                Console.WriteLine($"Voltage: {GetVoltage(resultA0)}V");
 
-                if(resultA0 <= 0)
-                {
-                    Console.WriteLine($"Voltage: 0V");
-                }
-                else
-                {
-                    // 5v ca. 22610
-                    var voltage = (float)(resultA0 / 22610f) * 5.0f;
-                    Console.WriteLine($"Voltage: {voltage}V");
-                }
-                
                 Thread.Sleep(1000);
             }
+        }
+
+        private static float GetVoltage(ushort value)
+        {
+            if(value <= 0)
+            {
+                return 0;
+            }
+
+            return (float)(value / 22610f) * 5.0f;
         }
     }
 }
