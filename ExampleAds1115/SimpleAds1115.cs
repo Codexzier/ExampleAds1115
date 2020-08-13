@@ -13,29 +13,6 @@ namespace ExampleAds1115
     {
         private readonly II2cPeripheral _i2CPeripheral;
 
-        /// <summary>
-        /// Input multiplexer configuration for ADS1115 (Bit 14 bis 12)
-        /// </summary>
-        public enum AdsInput
-        {
-            /// <summary>
-            /// AINp = AIN0 and AINn = GND
-            /// </summary>
-            AIN_0 = 0x4000,
-            /// <summary>
-            /// AINp = AIN1 and AINn = GND
-            /// </summary>
-            AIN_1 = 0x5000,
-            /// <summary>
-            /// AINp = AIN2 and AINn = GND
-            /// </summary>
-            AIN_2 = 0x6000,
-            /// <summary>
-            /// AINp = AIN3 and AINn = GND
-            /// </summary>
-            AIN_3 = 0x7000
-        }
-
         public SimpleAds1115()
         {
             var i2CBus = Device.CreateI2cBus();
@@ -49,14 +26,20 @@ namespace ExampleAds1115
         /// <returns></returns>
         internal ushort ReadSingleInputValue(AdsInput input)
         {
-            ushort config = 0x0003 |    // disable the comparator
-                            0x0100;     // Single-shot mode (default)
+            //ushort config = 0x0003 |    // disable the comparator
+            //                0x0100;     // Single-shot mode (default)
+
+            // disable the comparator
+            // Single-shot mode (default)
+            // Operational status/single-shot conversion start
+            // - Begin a single conversion
+            ushort config = 0x8103;
 
             config |= (ushort)input;
 
-            // Operational status/single-shot conversion start
-            // - Begin a single conversion
-            config |= 0x8000;
+            //// Operational status/single-shot conversion start
+            //// - Begin a single conversion
+            //config |= 0x8000;
 
             // prepare configuration to send on I²C
             byte[] data = new byte[] { (byte)(config >> 8), (byte)(config & 0xff) };
