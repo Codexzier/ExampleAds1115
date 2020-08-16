@@ -1,7 +1,6 @@
 ﻿using Meadow;
 using Meadow.Devices;
 using Meadow.Hardware;
-using System;
 using System.Threading;
 
 namespace ExampleAds1115
@@ -20,15 +19,12 @@ namespace ExampleAds1115
         }
 
         /// <summary>
-        /// Read
+        /// Read singel shot on input voltage.
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
+        /// <param name="input">Choose the input channel.</param>
+        /// <returns>Return the raw measurement value.</returns>
         internal ushort ReadSingleInputValue(AdsInput input)
         {
-            //ushort config = 0x0003 |    // disable the comparator
-            //                0x0100;     // Single-shot mode (default)
-
             // disable the comparator
             // Single-shot mode (default)
             // Operational status/single-shot conversion start
@@ -36,10 +32,6 @@ namespace ExampleAds1115
             ushort config = 0x8103;
 
             config |= (ushort)input;
-
-            //// Operational status/single-shot conversion start
-            //// - Begin a single conversion
-            //config |= 0x8000;
 
             // prepare configuration to send on I²C
             byte[] data = new byte[] { (byte)(config >> 8), (byte)(config & 0xff) };
