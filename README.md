@@ -1,17 +1,15 @@
 # ExampleAds1115
-Mit diesem beispiel wird eine Klasse geliefert, mit dem sich das Modul ADS1115 Umfänglich auslesen lässt. Für den schnellen Einstieg habe ich einen Branch dazu abgeleitet mit einer einfachen und Kurzen Klasse.
+With this example, a class is supplied with which the ADS1115 module can be read out extensively. For a quick start I derived a branch with a simple and short class. (Branch: SimpleCode)
 
 ## Die Klasse Ads1115
-Mit der Instanze dieser Klasse können neben der Möglichkeit einzelne Messungen, auch Fortlaufenden Messungen abgefragt werden. Zudem kann die Maximale messbare höhe der anliegenden Spannung an den Eingängen voreingestellt werden.
+With the instance of this class, besides the possibility of single measurements, also continuous measurements can be queried. In addition, the maximum measurable height of the applied voltage at the inputs can be preset.
 
 ##### Standard Einestellungen
-Comperator ist ausgeschaltet
-Keine Verriegellung
+Comperator is switched off
+No locking
 Alert/Rdy active low
 Traditional comperator
-
 Single-shot mode
-
 
 
 ###### Options
