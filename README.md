@@ -5,11 +5,11 @@ With this example, a class is supplied with which the ADS1115 module can be read
 With the instance of this class, besides the possibility of single measurements, also continuous measurements can be queried. In addition, the maximum measurable height of the applied voltage at the inputs can be preset.
 
 ##### Standard Einestellungen
-Comperator is switched off
-No locking
-Alert/Rdy active low
-Traditional comperator
-Single-shot mode
+- Comperator is switched off
+- No locking
+- Alert/Rdy active low
+- Traditional comperator
+- Single-shot mode
 
 
 ###### Options
