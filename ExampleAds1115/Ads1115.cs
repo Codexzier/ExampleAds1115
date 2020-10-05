@@ -24,8 +24,8 @@ namespace ExampleAds1115
         }
 
         /// <summary>
-        /// Operational status / single-shot conversion start.
-        /// This option can only written when in power-down mode. (Bit 15)
+        /// OS: Operational status / single-shot conversion start.
+        /// This option can only written when in power-down mode. (Bits[15])
         /// </summary>
         public enum OperationalStatus
         {
@@ -41,10 +41,47 @@ namespace ExampleAds1115
             SingleShot = 0x8000
         }
 
-        
+        /// <summary>
+        /// MUX: Input multiplexer configuration (Bits[14:12])
+        /// </summary>
+        public enum InputMultiplexerConfiguration
+        {
+            /// <summary>
+            /// 000: AINp = AIN0 and AINn = AIN1 (default)
+            /// </summary>
+            AINpAIN0_AINnAIN1 = 0x0000,
+            /// <summary>
+            /// 001: AINP = AIN0 and AINN = AIN3
+            /// </summary>
+            AINpAIN0_AINnAIN3 = 0x0,
+            /// <summary>
+            /// 010: AINP = AIN1 and AINN = AIN3
+            /// </summary>
+            AINpAIN1_AINnAIN3,
+            /// <summary>
+            /// 011: AINP = AIN2 and AINN = AIN3
+            /// </summary>
+            AINpAIN2_AINnAIN3,
+            /// <summary>
+            /// 100: AINP = AIN0 and AINN = GND
+            /// </summary>
+            AINpAIN0_AINnGND,
+            /// <summary>
+            /// 101: AINP = AIN1 and AINN = GND
+            /// </summary>
+            AINpAIN1_AINnGND,
+            /// <summary>
+            /// 110: AINP = AIN2 and AINN = GND
+            /// </summary>
+            AINpAIN2_AINnGND,
+            /// <summary>
+            /// 111: AINP = AIN3 and AINN = GND
+            /// </summary>
+            AINpAIN3_AINnGND
+        }
 
         /// <summary>
-        /// Programmable gain amplifier configuration (Bit 11 bis 9)
+        /// PGA: Programmable gain amplifier configuration (Bits[11:9])
         /// </summary>
         public enum ProgrammableGainAmplifier
         {
@@ -63,7 +100,7 @@ namespace ExampleAds1115
         }
 
         /// <summary>
-        /// Device operating mode for continuous or power-down single-shot (Bit 8)
+        /// MODE: Device operating mode for continuous or power-down single-shot (Bits[8])
         /// </summary>
         public enum DeviceOperatingMode
         {
@@ -72,7 +109,7 @@ namespace ExampleAds1115
         }
 
         /// <summary>
-        /// Date rate setting (Bit 7 bis 5).
+        /// DR: Date rate setting (Bits[7:5]).
         /// </summary>
         public enum DataRate
         {
@@ -90,7 +127,7 @@ namespace ExampleAds1115
         }
 
         /// <summary>
-        /// Comparator mode (Bit 4)
+        /// COMP_MODE: Comparator mode (Bits[4])
         /// </summary>
         public enum ComparatorMode
         {
@@ -105,7 +142,7 @@ namespace ExampleAds1115
         }
 
         /// <summary>
-        /// COMP_MODE: Comparator polarity (Bit 3)
+        /// COMP_POL: Comparator polarity (Bits[3])
         /// </summary>
         public enum ComparatorPolarity
         {
@@ -114,7 +151,7 @@ namespace ExampleAds1115
         }
 
         /// <summary>
-        /// COMP_LAT: Latching comparator (Bit 2)
+        /// COMP_LAT: Latching comparator (Bits[2])
         /// </summary>
         public enum LatchingComparator
         {
@@ -125,6 +162,9 @@ namespace ExampleAds1115
             Latching = 0x0002
         }
 
+        /// <summary>
+        /// COMP_QUE: Comparator queue and disable (Bits[1:0])
+        /// </summary>
         public enum ComparatorQueueAndDisable
         {
             AssertAfterOneConversion = 0x0000,
@@ -141,7 +181,6 @@ namespace ExampleAds1115
 
         public Ads1115(AdsAddress address = AdsAddress.Default)
         {
-
             var i2CBus = Device.CreateI2cBus();
             this._i2CPeripheral = new I2cPeripheral(i2CBus, (byte)address);
         }
